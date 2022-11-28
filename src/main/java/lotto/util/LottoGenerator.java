@@ -7,18 +7,27 @@ import java.util.List;
 import lotto.domain.UserLotto;
 
 public class LottoGenerator {
-    public static List<UserLotto> generatorUserLotto(int quantity) {
-        List<UserLotto> userLottos = new ArrayList<>();
-        for (int i = 0; i < quantity; i++) {
-            userLottos.add(new UserLotto(createLotto()));
-        }
-        return userLottos;
+    private static final int MIN_NUMBER_OF_LOTTO = 1;
+    private static final int MAX_NUMBER_OF_LOTTO = 45;
+    private static final int SIZE_OF_PICKING_LOTTO = 6;
+
+    public static List<UserLotto> createLotto(int quantity) {
+        List<UserLotto> lottos = buyingLottos(quantity);
+        return lottos;
     }
 
-    private static List<Integer> createLotto() {
-        List<Integer> numbers = new ArrayList<>();
-        numbers = Randoms.pickUniqueNumbersInRange(1, 45, 6);
-        Collections.sort(numbers);
-        return numbers;
+    public static List<UserLotto> buyingLottos(int quantity) {
+        List<UserLotto> lottos = new ArrayList<>();
+        for (int i = 0; i < quantity; i++) {
+            List<Integer> lottoNumbers = Randoms.pickUniqueNumbersInRange(MIN_NUMBER_OF_LOTTO, MAX_NUMBER_OF_LOTTO, SIZE_OF_PICKING_LOTTO);
+            lottos.add(new UserLotto(sortedList(lottoNumbers)));
+        }
+        return lottos;
+    }
+
+    public static List<Integer> sortedList(List<Integer> unsortedList) {
+        List<Integer> sortedList = new ArrayList<>(unsortedList);
+        Collections.sort(sortedList);
+        return sortedList;
     }
 }
