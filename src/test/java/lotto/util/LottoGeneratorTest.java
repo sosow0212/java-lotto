@@ -3,6 +3,7 @@ package lotto.util;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 import java.util.List;
+import lotto.domain.UserLotto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -14,9 +15,9 @@ public class LottoGeneratorTest {
     @Test
     void lottoGeneratorTest() {
         // when
-        List<Integer> numbers = lottoGenerator.generatorLottoNumber();
+        List<UserLotto> userLottos = lottoGenerator.generatorUserLotto(3);
 
         // then
-        assertThat(numbers.size()).isEqualTo(LOTTO_SIZE);
+        assertThat(userLottos.size()).isEqualTo(3);
     }
 }
