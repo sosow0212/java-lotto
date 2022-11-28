@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import java.util.List;
-import lotto.exception.LottoException;
 
 public class Lotto {
     private final List<Integer> numbers;
@@ -10,6 +9,20 @@ public class Lotto {
     public Lotto(List<Integer> numbers, int bonusNumber) {
         this.numbers = numbers;
         this.bonusNumber = bonusNumber;
+    }
+
+    public boolean isContainsNumber(int userNumber) {
+        if (numbers.contains(userNumber)) {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean isContainsBonusNumber(List<Integer> userNumbers) {
+        if (userNumbers.contains(this.bonusNumber)) {
+            return true;
+        }
+        return false;
     }
 
 }

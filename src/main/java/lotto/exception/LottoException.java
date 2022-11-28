@@ -5,14 +5,11 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
-import lotto.view.OutputView;
 
 public class LottoException {
-    private final OutputView outputView = new OutputView();
     private final static int PERMITTED_LOTTO_LENGTH = 6;
     private final static int MIN_LOTTO_NUMBER = 1;
     private final static int MAX_LOTTO_NUMBER = 45;
-    private final static String ERROR = "[ERROR] ";
 
     public void validateCorrectNumbers(String input) {
         validateSizeIsCorrect(input);
