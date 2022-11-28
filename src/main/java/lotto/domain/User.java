@@ -14,7 +14,7 @@ public class User {
     }
 
     private List<UserLotto> createLottos() {
-        return LottoGenerator.generatorUserLotto(getLottoQuantity());
+        return LottoGenerator.createLotto(getLottoQuantity());
     }
 
     private int getLottoQuantity() {
@@ -23,5 +23,9 @@ public class User {
 
     public List<UserLotto> getLottos() {
         return lottos;
+    }
+
+    public double getYieldOfLotto(double totalPrice) {
+        return (totalPrice / buyingPrice * 100);
     }
 }

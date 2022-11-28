@@ -1,6 +1,9 @@
 package lotto.view;
 
+import java.text.DecimalFormat;
+import java.util.HashMap;
 import java.util.List;
+import lotto.domain.LottoInfo;
 import lotto.domain.UserLotto;
 
 public class OutputView {
@@ -34,10 +37,25 @@ public class OutputView {
         System.out.println("\n보너스 번호를 입력해 주세요.");
     }
 
-    public void printResult() {
+    public void printResult(String yield, HashMap<LottoInfo, Integer> userScore) {
         System.out.println("\n당첨 통계");
         System.out.println("---");
-        // 추후에 추가
+        printScore(userScore);
+        System.out.println("총 수익률은 " + yield + "%입니다.");
+    }
+
+    public void printScore(HashMap<LottoInfo, Integer> userScore) {
+        for (LottoInfo info : LottoInfo.values()) {
+            if (userScore.get(info) == null) {
+                userScore.put(info, 0);
+            }
+            System.out.println(info.getScore() + "개 일치 (" + getLottoPrice(info.getPrice()) + "원) - " + userScore.get(info) + "개");
+        }
+    }
+
+    public String getLottoPrice(int price) {
+        DecimalFormat decimalFormat = new DecimalFormat("###,###");
+        return decimalFormat.format(price);
     }
 
     public void printException(String message) {

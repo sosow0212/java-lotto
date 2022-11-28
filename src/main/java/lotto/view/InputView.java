@@ -31,7 +31,7 @@ public class InputView {
             return inputParser.correctNumbersParser(input);
         } catch (IllegalArgumentException exception) {
             outputView.printException(exception.getMessage());
-            return null;
+            return askCorrectNumbers();
         }
     }
 
