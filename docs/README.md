@@ -50,4 +50,6 @@
 - Util
   - LottoGenerator
     - 로또 랜덤 넘버 생성을 해준다.
+  - InputParser
+    - 유저가 입력한 값들의 타입을 바꿔주는 클래스
 
