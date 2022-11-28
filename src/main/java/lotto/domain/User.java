@@ -10,7 +10,11 @@ public class User {
     public User(int buyingPrice) {
         // 예외 처리 진행하기
         this.buyingPrice = buyingPrice;
-        this.lottos = LottoGenerator.generatorUserLotto(getLottoQuantity());
+        this.lottos = createLottos();
+    }
+
+    private List<UserLotto> createLottos() {
+        return LottoGenerator.generatorUserLotto(getLottoQuantity());
     }
 
     private int getLottoQuantity() {
