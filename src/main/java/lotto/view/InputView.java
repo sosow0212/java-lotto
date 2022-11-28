@@ -2,18 +2,24 @@ package lotto.view;
 
 import camp.nextstep.edu.missionutils.Console;
 import java.util.List;
+import lotto.domain.Lotto;
+import lotto.exception.LottoException;
+import lotto.exception.UserException;
 import lotto.util.InputParser;
 
 public class InputView {
+    private final OutputView outputView = new OutputView();
     private final InputParser inputParser = new InputParser();
+    private final UserException userException = new UserException();
+    private final LottoException lottoException = new LottoException();
 
     public int askBuyingPrice() {
         try {
             String input = Console.readLine();
-            // 예외처리
+            userException.validateBuyingPrice(input);
             return inputParser.numberParser(input);
         } catch (IllegalArgumentException exception) {
-            System.out.println(exception.getMessage());
+            outputView.printException(exception.getMessage());
             return askBuyingPrice();
         }
     }
@@ -21,22 +27,22 @@ public class InputView {
     public List<Integer> askCorrectNumbers() {
         try {
             String input = Console.readLine();
-            // 예외처리
+            lottoException.validateCorrectNumbers(input);
             return inputParser.correctNumbersParser(input);
         } catch (IllegalArgumentException exception) {
-            System.out.println(exception.getMessage());
-            return askCorrectNumbers();
+            outputView.printException(exception.getMessage());
+            return null;
         }
     }
 
-    public int askBonusNumber() {
+    public int askBonusNumber(List<Integer> numbers) {
         try {
             String input = Console.readLine();
-            // 예외처리
+            lottoException.validateBonusNumber(input, numbers);
             return inputParser.numberParser(input);
         } catch (IllegalArgumentException exception) {
-            System.out.println(exception.getMessage());
-            return askBonusNumber();
+            outputView.printException(exception.getMessage());
+            return askBonusNumber(numbers);
         }
     }
 }
